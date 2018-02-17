@@ -1,0 +1,56 @@
+instalacion
+
+# primero necesito habilitar EPEL en centos para poder instalar python-pip
+~# wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+~# rpm -ivh epel-release-latest-7.noarch.rpm
+
+    # EPEL notes:
+    # verificar si la repo esta up
+    ~# yum repolist 
+
+    # para usar EPEL repo
+    ~# yum --enablerepo=epel info package_name
+
+
+# instalo pip
+~# yum install python-pip
+
+
+# instalacion de powerline
+~# pip install git+git://github.com/Lokaltog/powerline
+
+# instalacion de fonts
+~# wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+~# wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+
+    # copiar .otf al fonts dir, normalmente en /usr/share/fonts o /usr/local/share/fonts
+    # o ver el path con `xset q`
+    ~# mv powerline.otf /path/to/fonts
+
+    # update font cache
+    ~# fc-cache -vf /path/to/fonts
+
+    # install confg file
+    ~# mv 10-powerline.conf /etc/fonts/conf.d/ 
+
+
+# agregar los bindings a tus dotfiles
+# verificar la ubicacion de los bindings 
+~# pip show powerline-status
+
+
+# Bash bindings 
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+source /path/to/powerline/bindings/bash/powerline.sh
+
+
+# Vim bindings
+set  rtp+=/path/to/powerline/bindings/vim/
+set laststatus=2
+set t_Co=256
+
+
+# Tmux bindings
+source /path/to/powerline/bindings/tmux/powerline.conf
