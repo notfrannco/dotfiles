@@ -1,0 +1,58 @@
+# app que se deben instalar porque eos no trae por defecto
+vim
+git
+audacious
+firefox
+
+
+# para habilitar add de ppa en elementary loki
+sudo apt-get install software-properties-common
+
+
+sudo add-apt-repository ppa:philip.scott/elementary-tweaks
+sudo apt-get update
+sudo apt-get install elementary-tweaks
+
+
+# powerline
+# primero instalamos pip
+sudo apt-get install python-pip
+
+# clonamos el proyecto powerline
+pip install git+git://github.com/Lokaltog/powerline
+
+# instalamos los fonts
+wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+
+
+# mover los fonts a tu fonts dir y actualizar el font cache
+# xset q para obtener el path de font para versiones distintas de eos loki
+mv PowerlineSymbols.otf /usr/share/fonts/
+fc-cache -vf /usr/share/fonts
+
+# install fonts config
+mv 10-powerline-symbols.conf /etc/fonts/conf.d/
+
+
+# agregamos los bindings correspondientes a vim, bash, tmux, etc
+# usar el comando 'pip show powerline-status' para obtener el path
+# a los bindings, suele variar de version en version
+
+# vim
+set rtp+=/usr/local/lib/python/dist-packages/powerline/bindings/vim/
+set laststatus=2
+set t_Co=256
+
+
+# tmux 
+source /path/to/bindings/tmux/powerline.conf 
+
+
+# bash
+# en el .bashrc
+export TERM="screen-256color"
+
+powerline-daemon -q
+. /home/jfranco/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh 
+
