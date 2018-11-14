@@ -25,9 +25,9 @@ set noeb vb t_vb=
 "set t_vb="
 
 "binding de powerline, checkear disponibilidad para py3"
-set  rtp+=/usr/lib64/python2.7/site-packages/powerline/bindings/vim/
-set laststatus=2
-set t_Co=256
+"set  rtp+=/usr/lib/python3.6/site-packages/powerline/bindings/vim"
+"set laststatus=2"
+"set t_Co=256"
 
 
 "split windows navegacion en lugar de C-w j solo C-j"
@@ -37,5 +37,5 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 
-"desabilita el backup, cuidado con este"
+"desabilita el backup, backup es para pussys" 
 set nobackup

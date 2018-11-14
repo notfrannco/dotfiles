@@ -1,11 +1,13 @@
-# app que se deben instalar porque eos no trae por defecto
+# app que se deben instalar porque elementary OS no trae por defecto
 vim
 git
 audacious
 firefox
+tmux
+ansible
 
 
-# para habilitar add de ppa en elementary loki
+# para habilitar add de ppa en elementary loki/juno
 sudo apt-get install software-properties-common
 
 
@@ -14,8 +16,8 @@ sudo apt-get update
 sudo apt-get install elementary-tweaks
 
 
-# powerline
-# primero instalamos pip
+# powerline con pip, porque el de la repo de ubuntu 
+# creaba muchos problemas (los basados en 16.04LTS)
 sudo apt-get install python-pip
 
 # clonamos el proyecto powerline
