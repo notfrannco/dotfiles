@@ -14,7 +14,6 @@ set tabstop=4
 
 set softtabstop=4
 set shiftwidth=4
-
 "para establecer otro comando de esc"
 :inoremap jk <esc>
 
@@ -29,13 +28,15 @@ set noeb vb t_vb=
 "set laststatus=2"
 "set t_Co=256"
 
-
 "split windows navegacion en lugar de C-w j solo C-j"
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-
 "desabilita el backup, backup es para pussys" 
 set nobackup
+
+"Especifico para ansible"
+autocmd FileType yaml setlocal ai ts=2 sw=2 et
+autocmd FileType yml setlocal ai ts=2 sw=2 et
