@@ -14,16 +14,36 @@ alias tks="tmux kill-session -t"
 alias la="ls -A"
 
 
-# get current branch in git repo
-function parse_git_branch() {
-	BRANCH=`git branch 2>/dev/null | sed -n "s/* \(.*\)/\1/p"`
-	if [ ! "${BRANCH}" == "" ]
-	then
-		echo " $BRANCH "
-	else
-		echo ""
-	fi
-}
+# get current branch in git repo (si no estoy usando powerline)
+#function parse_git_branch() {
+#	BRANCH=`git branch 2>/dev/null | sed -n "s/* \(.*\)/\1/p"`
+#	if [ ! "${BRANCH}" == "" ]
+#	then
+#		echo " $BRANCH "
+#	else
+#		echo ""
+#	fi
+#}
+
 
 # default prompt si no uso powerline
-PS1='\[\e[01;32m\]\u\[\e[m\]  \[\e[01;34m\]\W\[\e[m\] \[\e[01;32m\]`parse_git_branch`\[\e[01;37m\] '
+#PS1='\[\e[01;32m\]\u\[\e[m\]  \[\e[01;34m\]\W\[\e[m\] \[\e[01;32m\]`parse_git_branch`\[\e[01;37m\] '
+
+
+
+
+# configuracion especifica para powerline (packages powerline powerline-fonts)
+# Nota:
+# 1) hay que configurar el archivo config.json del powerline y especificar
+# en la parte de shell > theme: "default_leftonly" para que pueda ver los 
+# branches de git
+# 2) por defecto powerline muestra 3 directorios padres desde el working directory
+# prefiero solo ver mi directory actual y eso se especifica en powerline config folder
+# en fedora esta en /etc/xdg/powerline/themes/shell/__main__.py 
+# en la opcion dir_limit_depth: 1
+if [ -f `which powerline-daemon` ]; then
+  powerline-daemon -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+  . /usr/share/powerline/bash/powerline.sh
+fi
