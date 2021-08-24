@@ -52,13 +52,18 @@ nnoremap <C-H> <C-W><C-H>
 set nobackup
 
 "Especifico para ansible"
-autocmd FileType yaml setlocal ai ts=2 sw=2 et
-autocmd FileType yml setlocal ai ts=2 sw=2 et
+autocmd FileType yaml setlocal ai ts=2 sw=2 et sts=2 cuc
+autocmd FileType yml setlocal ai ts=2 sw=2 et sts=2 cuc
 
 "Auto closing"
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap < <><left>
+"inoremap " ""<left>"
+"inoremap ' ''<left>"
+"inoremap ( ()<left>"
+"inoremap [ []<left>"
+"inoremap { {}<left>"
+"inoremap < <><left>"
+
+
+
+call plug#begin('~/.vim/plugged')
+Plug 'ryanoasis/vim-devicons'
