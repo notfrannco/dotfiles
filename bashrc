@@ -7,6 +7,7 @@
 #source /usr/lib64/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
 #alias ll='ls -la'
+alias ll='ls -l'
 #alias la='ls -a'
 alias tls="tmux list-sessions"
 alias ta="tmux attach -t"
@@ -15,19 +16,32 @@ alias la="ls -A"
 
 
 # get current branch in git repo (si no estoy usando powerline)
-#function parse_git_branch() {
-#	BRANCH=`git branch 2>/dev/null | sed -n "s/* \(.*\)/\1/p"`
-#	if [ ! "${BRANCH}" == "" ]
-#	then
-#		echo " $BRANCH "
-#	else
-#		echo ""
-#	fi
-#}
+function parse_git_branch() {
+	BRANCH=`git branch 2>/dev/null | sed -n "s/* \(.*\)/\1/p"`
+	if [ ! "${BRANCH}" == "" ]
+	then
+		echo " $BRANCH "
+	else
+		echo ""
+	fi
+}
+
+function battery_life() {
+	BATTERY=`acpi | awk 'NR==1{print $4}' | sed 's/.$//'`
+	if [ ! "${BATTERY}" == "" ]
+	then
+		echo " $BATTERY "
+	else
+		echo ""
+	fi
+}
 
 
 # default prompt si no uso powerline
 #PS1='\[\e[01;32m\]\u\[\e[m\]  \[\e[01;34m\]\W\[\e[m\] \[\e[01;32m\]`parse_git_branch`\[\e[01;37m\] '
+
+# default prompt with battery info
+#PS1='\[\e[01;32m\]\u\[\e[m\] battery:`battery_life` \[\e[01;34m\]\W\[\e[m\] \[\e[01;32m\]`parse_git_branch`\[\e[01;37m\] '
 
 
 
