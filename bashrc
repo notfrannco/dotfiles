@@ -7,12 +7,25 @@
 #source /usr/lib64/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
 #alias ll='ls -la'
-alias ll='ls -l'
+alias ll='ls -l --color'
 #alias la='ls -a'
 alias tls="tmux list-sessions"
 alias ta="tmux attach -t"
 alias tks="tmux kill-session -t"
-alias la="ls -A"
+alias la="ls -A --color"
+alias ls="ls --color"
+
+
+# prompot colors
+NON='\033[00m' # white
+RED='\033[01;31m'
+GRN='\033[01;32m'
+YEL='\033[01;33m'
+BLUE='\033[01;34m'
+PURPLE='\033[01;35m'
+CIAN='\033[01;36m'
+ORANGE='\033[0;33m'
+
 
 
 # get current branch in git repo (si no estoy usando powerline)
@@ -27,21 +40,30 @@ function parse_git_branch() {
 }
 
 function battery_life() {
-	BATTERY=`acpi | awk 'NR==1{print $4}' | sed 's/.$//'`
-	if [ ! "${BATTERY}" == "" ]
-	then
-		echo " $BATTERY "
-	else
-		echo ""
-	fi
+	#BATTERY=`acpi | awk 'NR==1{print $4}' | sed 's/.$//'`
+	BATTERY=`acpi | awk 'NR==1{print $4}' | sed 's/.$//' |sed 's/%$//'`
+    if [ "$BATTERY" -ge 60 ]; then # +60 green
+        echo -e "${GRN} $BATTERY"
+    elif [ "$BATTERY" -ge 40 ] && [ "$BATTERY" -le 59 ]; then # 40-59 # yellow
+        echo -e "${YEL} $BATTERY"
+    elif [ "$BATTERY" -ge 15 ] && [ "$BATTERY" -le 39 ]; then # 15-39 # naranja
+        echo -e "${ORANGE} $BATTERY"
+    elif [ "$BATTERY" -ge 1 ] && [ "$BATTERY" -le 14 ]; then # 1-14 # red
+        echo -e "${RED} $BATTERY"
+    fi
 }
 
 
+
+
+
+
+
 # default prompt si no uso powerline
-#PS1='\[\e[01;32m\]\u\[\e[m\]  \[\e[01;34m\]\W\[\e[m\] \[\e[01;32m\]`parse_git_branch`\[\e[01;37m\] '
+#PS1="${GRN}\u${NON}  ${BLUE}\W ${GRN}"\`"parse_git_branch"\`" ${NON} "
 
 # default prompt with battery info
-#PS1='\[\e[01;32m\]\u\[\e[m\] battery:`battery_life` \[\e[01;34m\]\W\[\e[m\] \[\e[01;32m\]`parse_git_branch`\[\e[01;37m\] '
+#PS1="${GRN}\u "\`"battery_life"\`"% ${NON} ${BLUE}\W ${GRN}"\`"parse_git_branch"\`" ${NON} "
 
 
 
@@ -61,3 +83,6 @@ if [ -f `which powerline-daemon` ]; then
   POWERLINE_BASH_SELECT=1
   . /usr/share/powerline/bash/powerline.sh
 fi
+
+
+alias k="kubectl"
