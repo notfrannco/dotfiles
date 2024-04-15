@@ -43,27 +43,44 @@ function battery_life() {
 	#BATTERY=`acpi | awk 'NR==1{print $4}' | sed 's/.$//'`
 	BATTERY=`acpi | awk 'NR==1{print $4}' | sed 's/.$//' |sed 's/%$//'`
     if [ "$BATTERY" -ge 60 ]; then # +60 green
-        echo -e "${GRN} $BATTERY"
+        echo -e "${GRN}$BATTERY"
     elif [ "$BATTERY" -ge 40 ] && [ "$BATTERY" -le 59 ]; then # 40-59 # yellow
-        echo -e "${YEL} $BATTERY"
+        echo -e "${YEL}$BATTERY"
     elif [ "$BATTERY" -ge 15 ] && [ "$BATTERY" -le 39 ]; then # 15-39 # naranja
         echo -e "${ORANGE} $BATTERY"
     elif [ "$BATTERY" -ge 1 ] && [ "$BATTERY" -le 14 ]; then # 1-14 # red
-        echo -e "${RED} $BATTERY"
+        echo -e "${RED}$BATTERY"
     fi
 }
 
+function get_k8s_namespace() {
+    K8S_NS=$(kubectl config view --minify -o jsonpath="{.contexts[0].context.namespace}")
+    if [ -z $K8S_NS ]; then
+        echo "default"
+    else
+        echo "$K8S_NS"
+    fi
+}
+
+function get_k8s_user() {
+    kubectl config current-context | cut -d '@' -f 1
+}
+
+function set_k8s_prompt () {
+    USER=$(get_k8s_user)
+    NAMESPACE=$(get_k8s_namespace)
+    echo -e "(${BLUE}⎈ ${NON}|${RED}$USER${CIAN}:$NAMESPACE${NON})"
+} 
 
 
-
-
-
+# default prompt for k8s
+#PS1="${GRN}\u${NON}  ${BLUE}\W ${GRN}"\`"parse_git_branch"\`" ${NON}"\`"set_k8s_prompt"\`" ${NON} "
 
 # default prompt si no uso powerline
 #PS1="${GRN}\u${NON}  ${BLUE}\W ${GRN}"\`"parse_git_branch"\`" ${NON} "
 
 # default prompt with battery info
-#PS1="${GRN}\u "\`"battery_life"\`"% ${NON} ${BLUE}\W ${GRN}"\`"parse_git_branch"\`" ${NON} "
+#PS1="${GRN}\u ${YEL}🗲 "\`"battery_life"\`"% ${NON} ${BLUE}\W ${GRN}"\`"parse_git_branch"\`" ${NON} "
 
 
 
