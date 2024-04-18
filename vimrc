@@ -63,7 +63,8 @@ autocmd FileType yml setlocal ai ts=2 sw=2 et sts=2 cuc
 "inoremap { {}<left>"
 "inoremap < <><left>"
 
+"search highlight"
+set hlsearch
 
-
-call plug#begin('~/.vim/plugged')
-Plug 'ryanoasis/vim-devicons'
+"search highlight when still typing"
+set incsearch
