@@ -14,6 +14,7 @@ alias ta="tmux attach -t"
 alias tks="tmux kill-session -t"
 alias la="ls -A --color"
 alias ls="ls --color"
+alias grep="grep --color"
 
 
 # prompot colors
@@ -53,7 +54,7 @@ function battery_life() {
     fi
 }
 
-function get_k8s_namespace() {
+function gns() {
     K8S_NS=$(kubectl config view --minify -o jsonpath="{.contexts[0].context.namespace}")
     if [ -z $K8S_NS ]; then
         echo "default"
@@ -66,11 +67,16 @@ function get_k8s_user() {
     kubectl config current-context | cut -d '@' -f 1
 }
 
+function sns() {
+    kubectl config set-context --current --namespace=$1
+}
+
 function set_k8s_prompt () {
     USER=$(get_k8s_user)
     NAMESPACE=$(get_k8s_namespace)
     echo -e "(${BLUE}⎈ ${NON}|${RED}$USER${CIAN}:$NAMESPACE${NON})"
 } 
+
 
 
 # default prompt for k8s
