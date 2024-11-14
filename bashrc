@@ -266,6 +266,15 @@ export PATH=$PATH:/home/jfranco/.kubescape/bin
 # aws cli auto complete 
 complete -C '/usr/local/bin/aws_completer' aws
 
+# run on all aws accounts
+function awscmdall(){
+    AWS_PROFILES=$(aws configure list-profiles)
+    for PROFILE in $AWS_PROFILES; do
+        eval "$1 --profile $PROFILE --region us-east-1"
+        #eval "$1"
+    done
+}
+
 
 # list ec2 instances
 function awsec2a() {
