@@ -140,6 +140,7 @@ alias tks="tmux kill-session -t"
 alias la="ls -A --color"
 alias ls="ls --color"
 alias grep="grep --color"
+alias gtags="git tag --format='%(creatordate:short)%09%(refname:strip=2)' --sort=creatordate"
 
 
 # prompot colors
