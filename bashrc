@@ -219,6 +219,20 @@ function awsgpa() {
     aws configure list-profiles
 }
 
+# aws unset env for logout in bash
+function awspo() {
+    unset AWS_PROFILE
+}
+
+# set kubectl config file location
+function kcfg(){
+    export KUBECONFIG=$1
+}
+
+# unset kubectl config file location
+function kcfgo(){
+    unset KUBECONFIG
+}
 
 # default prompt for k8s
 #PS1="${GRN}\u${NON}  ${BLUE}\W ${GRN}"\`"parse_git_branch"\`" ${NON}"\`"set_k8s_prompt"\`" ${NON} "
@@ -288,3 +302,12 @@ function awsec2a() {
       jq '.Reservations[].Instances[] | "EC2: \(.InstanceId): \(.State.Name) \(.InstanceType) \(.LaunchTime)"'
   done
 }
+source $HOME/.tenv.completion.bash
+
+
+
+# from url https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/atomic.omp.json
+#eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/main/themes/atomic.omp.json')"
+
+# from local folder
+eval "$(oh-my-posh init bash --config '/home/jfranco/.atomic.omp.json')"
