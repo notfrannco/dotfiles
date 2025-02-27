@@ -1,0 +1,43 @@
+{
+    "aws.telemetry": false,
+    "editor.fontWeight": "bold",
+    "terminal.integrated.fontWeight": "bold",
+    "redhat.telemetry.enabled": true,
+    "yaml.customTags": [
+        "!Base64 scalar",
+        "!Cidr scalar",
+        "!And sequence",
+        "!Equals sequence",
+        "!If sequence",
+        "!Not sequence",
+        "!Or sequence",
+        "!Condition scalar",
+        "!FindInMap sequence",
+        "!GetAtt scalar",
+        "!GetAtt sequence",
+        "!GetAZs scalar",
+        "!ImportValue scalar",
+        "!Join sequence",
+        "!Select sequence",
+        "!Split sequence",
+        "!Sub scalar",
+        "!Transform mapping",
+        "!Ref scalar"
+    ],
+    "terminal.integrated.defaultProfile.windows": "Ubuntu-24.04 (WSL)",
+    "terminal.integrated.fontFamily": "RobotoMono Nerd Font",
+    "editor.fontFamily": "MesloLGL Nerd Font",
+    "editor.detectIndentation": false,
+    "editor.lineNumbers": "on",
+    "workbench.colorTheme": "Catppuccin Macchiato",
+    "vim-status-bar.useMonokai": true,
+    "cfnLint.path": "C:\\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\cfn-lint.exe",
+    "vim.commandLineModeKeyBindings": [],
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "k"],
+            "after": ["<Esc>"]
+        } 
+    ],
+    "editor.tabSize": 2
+}
