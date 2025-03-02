@@ -137,66 +137,6 @@ return { -- LSP Configuration & Plugins
       },
       dockerls = {},
       docker_compose_language_service = {},
-      --pylsp = {
-      --  settings = {
-      --    pylsp = {
-      --      plugins = {
-      --        pyflakes = { enabled = false },
-      --        pycodestyle = { enabled = false },
-      --        autopep8 = { enabled = false },
-      --        yapf = { enabled = false },
-      --        mccabe = { enabled = false },
-      --        pylsp_mypy = { enabled = false },
-      --        pylsp_black = { enabled = false },
-      --        pylsp_isort = { enabled = false },
-      --      },
-      --    },
-      --  },
-      --},
-      -- basedpyright = {
-      --   -- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md
-      --   settings = {
-      --     basedpyright = {
-      --       disableOrganizeImports = true, -- Using Ruff's import organizer
-      --       disableLanguageServices = false,
-      --       analysis = {
-      --         ignore = { '*' },                 -- Ignore all files for analysis to exclusively use Ruff for linting
-      --         typeCheckingMode = 'off',
-      --         diagnosticMode = 'openFilesOnly', -- Only analyze open files
-      --         useLibraryCodeForTypes = true,
-      --         autoImportCompletions = true,     -- whether pyright offers auto-import completions
-      --       },
-      --     },
-      --   },
-      -- },
-      --ruff = {
-      --  -- Notes on code actions: https://github.com/astral-sh/ruff-lsp/issues/119#issuecomment-1595628355
-      --  -- Get isort like behavior: https://github.com/astral-sh/ruff/issues/8926#issuecomment-1834048218
-      --  commands = {
-      --    RuffAutofix = {
-      --      function()
-      --        vim.lsp.buf.execute_command {
-      --          command = 'ruff.applyAutofix',
-      --          arguments = {
-      --            { uri = vim.uri_from_bufnr(0) },
-      --          },
-      --        }
-      --      end,
-      --      description = 'Ruff: Fix all auto-fixable problems',
-      --    },
-      --    RuffOrganizeImports = {
-      --      function()
-      --        vim.lsp.buf.execute_command {
-      --          command = 'ruff.applyOrganizeImports',
-      --          arguments = {
-      --            { uri = vim.uri_from_bufnr(0) },
-      --          },
-      --        }
-      --      end,
-      --      description = 'Ruff: Format imports',
-      --    },
-      --  },
-      --},
       rust_analyzer = {
         ['rust-analyzer'] = {
           cargo = {
@@ -211,8 +151,59 @@ return { -- LSP Configuration & Plugins
       tailwindcss = {},
       jsonls = {},
       sqlls = {},
-      terraformls = {},
-      yamlls = {},
+      terraformls = {
+        filetypes = { "terraform", "tf", "hcl" },
+        settings = {
+          terraform = {
+            lint = {
+              enable = true, -- Ensure linting is enabled
+            },
+            format = {
+              enable = true, -- Enable built-in formatting
+            },
+          },
+        },
+      },
+      --yamlls = {
+      --  settings = {
+      --    yaml = {
+      --      validate = true,
+      --      schemaStore = { enable = true },
+      --      schemas = {
+      --        ["https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json"] = "*.yaml"
+      --      },
+      --      customTags = {
+      --        "!Ref scalar",
+      --        "!Sub scalar",
+      --        "!Sub sequence",
+      --        "!GetAtt scalar",
+      --        "!GetAtt sequence",
+      --        "!Join sequence",
+      --        "!FindInMap sequence",
+      --        "!Base64 scalar",
+      --        "!Cidr sequence",
+      --        "!ImportValue scalar",
+      --        "!Select sequence",
+      --        "!Split sequence",
+      --        "!And sequence",
+      --        "!If sequence",
+      --        "!Not sequence",
+      --        "!Equals sequence",
+      --        "!Or sequence"
+      --      },
+      --    }
+      --  }
+      --},
+      ansiblels = {
+        filetypes = { "yaml", "yml", "ansible" },
+        settings = {
+          ansible = {
+            ansibleLint = {
+              enabled = true,
+            },
+          },
+        },
+      },
       bashls = {},
       graphql = {},
       cssls = {},
@@ -239,7 +230,11 @@ return { -- LSP Configuration & Plugins
         'isort',
         'mypy',
         'pylint',
-        'tflint'
+        'tflint',
+        'cfn-lint',
+        'yaml-language-server',
+        'ansible-language-server',
+        'ansible-lint',
       },
     }
 

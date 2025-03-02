@@ -54,3 +54,8 @@ vim.keymap.set('v', '>', '>gv', opts)
 
 -- Keep last yanked when pasting
 vim.keymap.set('v', 'p', '"_dP', opts)
+
+-- format file
+vim.keymap.set("n", "<leader>f", function()
+  vim.lsp.buf.format()
+end, { desc = "Format file" })
